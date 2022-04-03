@@ -28,16 +28,16 @@ stage ('dockerimageBuild')
     {
     steps
     {
-        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service; sudo docker build -t account-service . " 
+        sh "cd /home/ubuntu/workspace/jenkins-piplinejob/account-service; sudo docker build -t account-service . " 
     }
 }
      stage ('dockerimagepush ') 
 {
     steps
     {
-       sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo  docker login -uankit1111 -pmiet@1234 "
-        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo docker tag account-service ankit1111/account-service "
-        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo docker push ankit1111/account-service  "
+        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo  docker login -nagurbabu -@Nagur336 "
+        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo docker tag account-service nagurbabu/account-service "
+        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo docker push nagurbabu/account-service  "
         
         
     }
