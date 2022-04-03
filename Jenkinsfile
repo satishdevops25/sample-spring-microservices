@@ -35,7 +35,7 @@ stage ('dockerimageBuild')
 {
     steps
     {
-        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo  docker login -nagurbabu -@Nagur336 "
+       sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo  docker login -nagurbabu -@Nagur336 "
         sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo docker tag account-service nagurbabu/account-service "
         sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/account-service ; sudo docker push nagurbabu/account-service  "
         
