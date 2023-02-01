@@ -19,7 +19,7 @@ stage ('Build')
 {
     steps
     {
-       sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/customer-service ; mvn clean install " 
+       sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; mvn clean install "  
     }
 }
 
@@ -28,16 +28,16 @@ stage ('dockerimageBuild')
     {
     steps
     {
-        sh "cd /home/ubuntu/workspace/jenkins-piplinejob/customer-service; sudo docker build -t customer-service . " 
+        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service; sudo docker build -t customer-service . "  
     }
 }
      stage ('dockerimagepush ') 
 {
     steps
     {
-       sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/customer-service ; sudo  docker login -u nagurbabu -p @Nagur336 "
-        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/customer-service ; sudo docker tag account-service nagurbabu/customer-service "
-        sh "cd /home/ubuntu/workspace/jenkins-pipelinejob/customer-service ; sudo docker push nagurbabu/customer-service  "
+       sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo  docker login -u satishdevops25 -p 9502249024 "
+        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker tag account-service satishdevops25/customer-service "
+        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker push satishdevops25/customer-service  "
         
         
     }
