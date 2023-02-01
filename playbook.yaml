@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: Deploy application
+    copy:
+      src: /path/to/deployment/file
+      dest: /path/to/destination
+    mode: 0755
+
+
+
+---
+
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Checkout the deployment file from github
+      git:
+        repo: "https://github.com/username/repository.git"
+        dest: "/path/to/working/directory"
+        version: "master"
+        accept_hostkey: yes
+
+    - name: Run the deployment file
+      shell: "sh /path/to/deployment/file.sh"
