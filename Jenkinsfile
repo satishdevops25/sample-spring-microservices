@@ -36,7 +36,7 @@ stage ('dockerimageBuild')
     steps
     {
        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo  docker login -u satishdevops25 -p 9502249024 "
-        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker tag 85b9dcac4be6 satishdevops25/customer-service "
+        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker tag customer-service satishdevops25/customer-service "
         sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker push satishdevops25/customer-service  "
         
         
