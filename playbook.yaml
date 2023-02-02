@@ -1,20 +1,12 @@
 ---
 - hosts: all
-  collections:
-    - kubernetes.core
+  become: yes
   tasks:
-  - name: Create a pod
-    k8s:
-      state: present
-      definition:
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: "utilitypod-1"
-          namespace: default
-          labels:
-            app: galaxy
-        spec:
-          containers:
-          - name: utilitypod
-            image: customer-service
+  - name: Deploy application
+    copy:
+      src: /home/ubuntu/workspace/MICROSERVICES/deployment.yaml
+      dest: /root/
+    mode: 0755
+    
+  - name: Run the deployment file
+    shell: "kubectl apply -f /root/deployment.yaml"
