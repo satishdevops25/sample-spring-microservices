@@ -5,7 +5,7 @@ label 'BUILD'
 
 stages {
 
-stage ('Checkout') 
+   stage ('Checkout') 
 {
 steps
     {
@@ -15,6 +15,21 @@ steps
     }
     
 }
+  stage("build & SonarQube analysis") {
+            steps {
+              withSonarQubeEnv('SONARQUBE') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+          }
+          stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+
 stage ('Build') 
 {
     steps
