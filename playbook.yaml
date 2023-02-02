@@ -5,8 +5,8 @@
   - name: Deploy application
     copy:
       src: /home/ubuntu/workspace/MICROSERVICES/deployment.yaml
-      dest: /root/
-    mode: 0755
-    
+      dest: /root
+      mode: 0755
+
   - name: Run the deployment file
     shell: "kubectl apply -f /root/deployment.yaml"
