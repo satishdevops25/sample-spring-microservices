@@ -55,13 +55,14 @@ stage ('dockerimageBuild')
     {
        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo  docker login -u satishdevops25 -p 9502249024 "
         sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker tag customer-service satishdevops25/customer-service "
-        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker push satishdevops25/customer-service  "       
+        sh "cd /home/ubuntu/workspa1ce/MICROSERVICES/customer-service ; sudo docker push satishdevops25/customer-service  "       
     }
 }
-  stage (nexusArtifactUploader)
+  stage ("nexusArtifactUploader")
    {
       steps
       {
+         sh "sudo docker push satishdevops25/customer-service"
          nexusArtifactUploader credentialsId: 'NEXUS', groupId: 'pl.piomin', nexusUrl: '3.111.57.13:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'MAVEN', version: '1.0-SNAPSHOT'
       }
    }   
