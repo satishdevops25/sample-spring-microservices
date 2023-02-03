@@ -57,7 +57,13 @@ stage ('dockerimageBuild')
         
     }
 }
- 
+stage (nexusArtifactUploader)
+   {
+      steps
+      {
+         nexusArtifactUploader credentialsId: 'NEXUS', groupId: 'pl.piomin', nexusUrl: '3.111.57.13:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'MAVEN', version: '1.0-SNAPSHOT'
+      }
+   }  
    
 stage ('k8sdeployment') 
     {
