@@ -3,32 +3,35 @@ agent {
 label 'BUILD'
 }
 
-stages {
-
+stages 
+{
    stage ('Checkout') 
 {
 steps
-    {
-    
-        checkout scm
-        
+    {   
+        checkout scm   
     }
     
 }
-  stage("build & SonarQube analysis") {
-            steps {
-              withSonarQubeEnv('SONARQUBE') {
+  stage("build & SonarQube analysis") 
+{
+     steps {
+           withSonarQubeEnv('SONARQUBE') 
+        {
                 sh 'mvn clean package sonar:sonar'
-              }
+        }
             }
-          }
-          stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
+}
+   stage("Quality Gate") 
+{
+       steps 
+           {
+              timeout(time: 1, unit: 'HOURS') 
+              {
                 waitForQualityGate abortPipeline: true
               }
             }
-          }
+  }
 
 stage ('Build') 
 {
@@ -52,21 +55,21 @@ stage ('dockerimageBuild')
     {
        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo  docker login -u satishdevops25 -p 9502249024 "
         sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker tag customer-service satishdevops25/customer-service "
-        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker push satishdevops25/customer-service  "
-        
-        
+        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker push satishdevops25/customer-service  "       
     }
 }
-   
+  stage (nexusArtifactUploader)
+   {
+      steps
+      {
+         nexusArtifactUploader credentialsId: 'NEXUS', groupId: 'pl.piomin', nexusUrl: '3.111.57.13:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'MAVEN', version: '1.0-SNAPSHOT'
+      }
+   }   
 stage ('k8sdeployment') 
     {
        steps { 
              sh " sudo ansible-playbook /home/ubuntu/workspace/MICROSERVICES/playbook.yaml"
-   
-    
-}
-}
-}
-    
-    
+             }
+    }
+}  
 }
