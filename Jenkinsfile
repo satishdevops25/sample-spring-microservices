@@ -69,7 +69,7 @@ stage ('dockerimageBuild')
                 type: jar
               ]
         ] ,
-           nexusArtifactUploader credentialsId: 'NEXUS', 
+           nexusArtifactUploader credentialsId: 'NEXUS2', 
            groupId: 'pl.piomin', 
            nexusUrl: '3.111.57.13:8081', 
            nexusVersion: 'nexus2', 
