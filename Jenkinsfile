@@ -52,20 +52,32 @@ stage ('dockerimageBuild')
      stage ('dockerimagepush ') 
 {
     steps
-    {
+   {
        sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo  docker login -u satishdevops25 -p 9502249024 "
         sh "cd /home/ubuntu/workspace/MICROSERVICES/customer-service ; sudo docker tag customer-service satishdevops25/customer-service "
         sh "cd /home/ubuntu/workspa1ce/MICROSERVICES/customer-service ; sudo docker push satishdevops25/customer-service  "       
     }
 }
-  stage ("nexusArtifactUploader")
+   stage('Upload Artifact')
    {
-      steps
-      {
-         sh "sudo docker push satishdevops25/customer-service"
-         nexusArtifactUploader credentialsId: 'NEXUS', groupId: 'pl.piomin', nexusUrl: '3.111.57.13:8081', nexusVersion: 'nexus2', protocol: 'http', repository: 'MAVEN', version: '1.0-SNAPSHOT'
-      }
-   }   
+      steps {
+        nexusArtifactUploader artifacts: [
+           [
+                artifactId: 'sample-spring-microservices',
+                classifier: '',
+                file: target/customer-service.jar,
+                type: jar
+              ]
+        ] ,
+           artifactId: 'sample-spring-microservices', 
+           artifactGroup: 'pl.piomin', 
+           artifactVersion: '1.0-SNAPSHOT', 
+           repositoryId: 'http://13.233.91.88:8081/repository/MAVEN', 
+           nexusUrl: 'http://13.233.91.88:8081',
+           nexusUser: 'nexus', 
+           nexusPassword: 'satish'
+            }
+   }
 stage ('k8sdeployment') 
     {
        steps { 
