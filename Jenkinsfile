@@ -68,8 +68,8 @@ stage ('dockerimageBuild')
                 file: target/customer-service.jar,
                 type: jar
               ]
-        ] ,
-           nexusArtifactUploader credentialsId: 'admin', 
+        ],
+           credentialsId: 'NEXUS', 
            groupId: 'pl.piomin', 
            nexusUrl: '3.111.57.13:8081', 
            nexusVersion: 'nexus2', 
