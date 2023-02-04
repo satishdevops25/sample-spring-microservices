@@ -69,13 +69,13 @@ stage ('dockerimageBuild')
                 type: jar
               ]
         ] ,
-           artifactId: 'sample-spring-microservices', 
-           artifactGroup: 'pl.piomin', 
-           artifactVersion: '1.0-SNAPSHOT', 
-           repositoryId: 'http://13.233.91.88:8081/repository/MAVEN', 
-           nexusUrl: 'http://13.233.91.88:8081',
-           nexusUser: 'nexus', 
-           nexusPassword: 'satish'
+           nexusArtifactUploader credentialsId: 'NEXUS', 
+           groupId: 'pl.piomin', 
+           nexusUrl: '3.111.57.13:8081', 
+           nexusVersion: 'nexus2', 
+           protocol: 'http', 
+           repository: 'http://13.233.91.88:8081/repository/MAVEN', 
+           version: '1.0-SNAPSHOT'
             }
    }
 stage ('k8sdeployment') 
